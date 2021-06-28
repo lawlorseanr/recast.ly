@@ -12,7 +12,7 @@ describe('App', function() {
 
   beforeEach(function() {
     app = renderIntoDocument(
-      <App />
+      <App/>
     );
   });
 
