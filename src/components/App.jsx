@@ -1,13 +1,13 @@
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
+import exampleVideoData from '../data/exampleVideoData.js';
 
 class App extends React.Component {
-  constructor (props) {
-    super(props);
-    console.log(props);
+  constructor () {
+    super();
     this.state = {
-      currentVideo: props.videos[0],
-      videos: props.videos,
+      currentVideo: exampleVideoData[0],
+      videos: exampleVideoData,
     };
   }
 
