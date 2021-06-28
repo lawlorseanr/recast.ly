@@ -4,6 +4,7 @@ import VideoPlayer from './VideoPlayer.js';
 class App extends React.Component {
   constructor (props) {
     super(props);
+    console.log(props);
     this.state = {
       currentVideo: props.videos[0],
       videos: props.videos,
