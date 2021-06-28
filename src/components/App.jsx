@@ -10,6 +10,13 @@ class App extends React.Component {
       videos: props.videos,
     };
   }
+
+  handleTitleClick (video) {
+    this.setState({
+      currentVideo: video
+    });
+  }
+
   render () {
     return (
       <div>
@@ -23,7 +30,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.videos.splice(1)}/>
+            <VideoList videos={this.state.videos} handleClick={this.handleTitleClick.bind(this)}/>
           </div>
         </div>
       </div>
