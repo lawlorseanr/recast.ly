@@ -7,9 +7,11 @@ $.ajaxPrefilter(function (settings, _, jqXHR) {
 });
 
 var searchYouTube = (query, callback) => {
+  console.log('query', query);
   $.get(SEARCH_ENDPOINT,
     {q: query},
-    data => { callback(data); });
+    data => { callback(data); }
+  );
 };
 
 export default searchYouTube;

@@ -25,7 +25,8 @@ class App extends React.Component {
     };
 
     this.state = {
-      searchTerm: 'wimbledon',
+      searchTerm: '',
+      lastSearch: new Date() - 1000,
       currentVideo: emptyVideo,
       videos: [],
       // currentVideo: exampleVideoData[0],
@@ -39,6 +40,12 @@ class App extends React.Component {
     };
 
     this.updateSearch = (term) => {
+      if (new Date() - this.state.lastSearch >= 500) {
+        searchYouTube(term,
+          data => { this.updateVideos(data); });
+        this.state.lastSearch = new Date();
+      }
+
       this.setState({
         searchTerm: term,
       });
@@ -54,8 +61,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    searchYouTube(this.state.searchTerm,
-      data => { this.updateVideos(data); });
+    this.updateSearch('wimbledon');
   }
 
   render () {
