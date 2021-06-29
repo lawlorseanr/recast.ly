@@ -1,14 +1,33 @@
+import Search from './Search.js';
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 import exampleVideoData from '../data/exampleVideoData.js';
+import searchYouTube from '../lib/searchYouTube.js';
 
 class App extends React.Component {
   constructor () {
     super();
+
     this.state = {
       currentVideo: exampleVideoData[0],
-      videos: exampleVideoData,
+      videos: exampleVideoData
     };
+
+    this.search = searchYouTube.bind(this);
+  }
+
+  updateVideos (videos) {
+    this.setState({
+      currentVideo: videos[0],
+      videos: videos,
+    });
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount', this);
+
+    this.search('wimbledon',
+      data => { this.updateVideos(data); });
   }
 
   handleTitleClick (video) {
@@ -22,7 +41,8 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            {/* <div><h5><em>search</em> view goes here</h5></div> */}
+            <Search />
           </div>
         </nav>
         <div className="row">
