@@ -8,15 +8,45 @@ class App extends React.Component {
   constructor () {
     super();
 
-    this.state = {
-      currentVideo: exampleVideoData[0],
-      videos: exampleVideoData
+    var emptyVideo = {
+      etag: '',
+      id: {
+        videoId: ''
+      },
+      snippet: {
+        title: '',
+        description: '',
+        thumbnails: {
+          default: {
+            url: '',
+          }
+        }
+      }
     };
 
-    this.search = searchYouTube.bind(this);
+    this.state = {
+      searchTerm: 'wimbledon',
+      currentVideo: emptyVideo,
+      videos: [],
+      // currentVideo: exampleVideoData[0],
+      // videos: exampleVideoData
+    };
+
+    this.handleTitleClick = (video) => {
+      this.setState({
+        currentVideo: video
+      });
+    };
+
+    this.updateSearch = (term) => {
+      this.setState({
+        searchTerm: term,
+      });
+    };
   }
 
   updateVideos (videos) {
+
     this.setState({
       currentVideo: videos[0],
       videos: videos,
@@ -24,16 +54,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount', this);
-
-    this.search('wimbledon',
+    searchYouTube(this.state.searchTerm,
       data => { this.updateVideos(data); });
-  }
-
-  handleTitleClick (video) {
-    this.setState({
-      currentVideo: video
-    });
   }
 
   render () {
@@ -50,7 +72,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.videos} handleClick={this.handleTitleClick.bind(this)}/>
+            <VideoList videos={this.state.videos} handleClick={this.handleTitleClick}/>
           </div>
         </div>
       </div>

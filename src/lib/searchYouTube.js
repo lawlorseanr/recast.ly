@@ -7,7 +7,6 @@ $.ajaxPrefilter(function (settings, _, jqXHR) {
 });
 
 var searchYouTube = (query, callback) => {
-  // TODO
   $.get(SEARCH_ENDPOINT,
     {q: query},
     data => { callback(data); });
