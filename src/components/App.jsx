@@ -1,43 +1,40 @@
 import Search from './Search.js';
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
-import exampleVideoData from '../data/exampleVideoData.js';
-import searchYouTube from '../lib/searchYouTube.js';
+import exampleData from '../data/exampleVideoData.js';
 
 class App extends React.Component {
-  constructor () {
+  constructor() {
     super();
 
-    var emptyVideo = {
-      etag: '',
-      id: {
-        videoId: ''
-      },
-      snippet: {
-        title: '',
-        description: '',
-        thumbnails: {
-          default: {
-            url: '',
-          }
-        }
-      }
-    };
-
     this.state = {
-      searchTerm: '',
-      lastSearch: new Date() - 1000,
-      currentVideo: emptyVideo,
-      videos: [],
-      // currentVideo: exampleVideoData[0],
-      // videos: exampleVideoData
+      video: exampleData[0],
+      videos: exampleData
     };
 
-    this.handleTitleClick = (video) => {
-      this.setState({
-        currentVideo: video
-      });
-    };
+  }
+
+  render() {
+    return (
+      <div>
+        <nav className="navbar">
+          <div className="col-md-6 offset-md-3">
+            <Search />
+          </div>
+        </nav>
+        <div className="row">
+          <div className="col-md-7">
+            <VideoPlayer video={this.state.video}/>
+          </div>
+          <div className="col-md-5">
+            <VideoList videos={this.state.videos}/>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
 
     this.updateSearch = (term) => {
       if (new Date() - this.state.lastSearch >= 500) {
